@@ -10,6 +10,7 @@ module.exports =  {
     rules:  {
         '@typescript-eslint/no-explicit-any': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
+        '@typescript-eslint/no-var-requires': 'off',
         indent: [ 'warn', 4 ],
         semi: [ 2, 'always' ],
         'quote-props': [ 'error', 'as-needed' ],
