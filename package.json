@@ -7,7 +7,7 @@
     "start": "node dist/index",
     "watch": "webpack --config webpack.config.ts --watch --mode development",
     "build": "npx webpack --config webpack.config.ts --mode development",
-    "build:production": "npx webpack --config webpack.config.ts --mode production",
+    "build:production": "webpack --config webpack.config.ts --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "TheBekker",
