@@ -33,7 +33,6 @@ module.exports = {
             }
         ]
     },
-    mode: process.env.NODE_ENV,
     resolve: {
         extensions: ['.tsx', '.ts', '.js']
     },

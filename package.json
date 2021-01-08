@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node dist/index",
-    "watch": "webpack --config webpack.config.ts --watch",
-    "build": "npx webpack --config webpack.config.ts",
-    "build:production": "NODE_ENV=production npx webpack --config webpack.config.ts",
+    "watch": "webpack --config webpack.config.ts --watch --mode development",
+    "build": "npx webpack --config webpack.config.ts --mode development",
+    "build:production": "npx webpack --config webpack.config.ts --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "TheBekker",
