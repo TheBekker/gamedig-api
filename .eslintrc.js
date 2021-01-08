@@ -8,18 +8,19 @@ module.exports =  {
         sourceType:  'module',  // Allows for the use of imports
     },
     rules:  {
-        "@typescript-eslint/no-explicit-any": "off",
-        "indent": [ "warn", 4 ],
-        "semi": [ 2, "always" ],
-        "quote-props": [ "error", "as-needed" ],
-        "quotes": [ "error", "single" ],
-        "prefer-arrow-callback": "warn",
-        "space-before-function-paren": [
-            "error",
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+        indent: [ 'warn', 4 ],
+        semi: [ 2, 'always' ],
+        'quote-props': [ 'error', 'as-needed' ],
+        quotes: [ 'error', 'single' ],
+        'prefer-arrow-callback': 'warn',
+        'space-before-function-paren': [
+            'error',
             {
-                "anonymous": "never",
-                "named": "never",
-                "asyncArrow": "always"
+                anonymous: 'never',
+                named: 'never',
+                asyncArrow: 'always'
             }
         ]
     },

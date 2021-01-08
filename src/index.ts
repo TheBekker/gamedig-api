@@ -9,6 +9,8 @@ import helmet from 'helmet';
 
 dotenv.config();
 
+import { queryRouter } from './query/query.router';
+
 /**
  * App Variables
  */
@@ -28,6 +30,7 @@ const app = express();
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use('/query', queryRouter);
 
 /**
  * Server Activation
