@@ -1,12 +1,14 @@
-FROM node:14
+FROM node:14.15.4-slim
+ENV PORT 8181
 
 RUN mkdir -p /app
-COPY . /app
 WORKDIR /app
+
+COPY . /app
 
 RUN npm install
 
 RUN npm run build:production
 
-EXPOSE 8181
-CMD [ "npm", "run", "start" ]
+EXPOSE ${PORT}
+CMD [ "node", "dist/index" ]

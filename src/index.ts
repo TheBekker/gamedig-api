@@ -1,7 +1,7 @@
 /**
  * Required External Modules
  */
-
+console.log('Starting server...');
 import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
@@ -16,6 +16,7 @@ import { queryRouter } from './query/query.router';
  */
 
 if (!process.env.PORT) {
+    console.log('Missing process.env.PORT');
     process.exit(1);
 }
 
