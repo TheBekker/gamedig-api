@@ -26,15 +26,19 @@ queryRouter.get('/:type/:host/:port', async (req: Request, res: Response) => {
                 server_ping = r.ping,
                 server_connect = r.connect;
 
-            let renderLine = outputTemplate;
-            renderLine = renderLine.replace('{type}', type.toString());
-            renderLine = renderLine.replace('{host}', host);
-            renderLine = renderLine.replace('{port}', port.toString());
-            renderLine = renderLine.replace('{players_amount}', players_amount.toString());
-            renderLine = renderLine.replace('{players_max}', players_max.toString());
-            renderLine = renderLine.replace('{server_ping}', server_ping.toString());
-            renderLine = renderLine.replace('{server_connect}', server_connect);
-            res.status(200).send(renderLine);
+	    if (req.query.template) {
+	      const renderLine = outputTemplate
+                    .replace(/{type}/g, type.toString())
+                    .replace(/{host}/g, host)
+                    .replace(/{port}/g, port.toString())
+                    .replace(/{players_amount}/g, players_amount.toString())
+                    .replace(/{players_max}/g, players_max.toString())
+                    .replace(/{server_ping}/g, server_ping.toString())
+                    .replace(/{server_connect}/g, server_connect);
+	      res.status(200).send(renderLine);
+	    } else {
+	      res.status(200).json(r);
+	    }
         }).catch(e => {
             res.status(200).send(offlineMessage);
         });
