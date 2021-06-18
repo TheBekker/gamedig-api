@@ -11,7 +11,7 @@ queryRouter.get('/:type/:host/:port', async (req: Request, res: Response) => {
         const port: number = parseInt(req.params.port);
         const outputTemplate: string = decodeURI(req.query.template as string);
         let offlineMessage: string = decodeURI(req.query.offline_message as string);
-        if(!offlineMessage) {
+        if(!req.query.offline_message) {
             offlineMessage = 'Server offline';
         }
 
@@ -40,7 +40,7 @@ queryRouter.get('/:type/:host/:port', async (req: Request, res: Response) => {
 	      res.status(200).json(r);
 	    }
         }).catch(e => {
-            res.status(200).send(offlineMessage);
+            res.status(500).send(offlineMessage);
         });
     } catch (e) {
         res.status(404).send(e.message);
