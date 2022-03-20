@@ -14,10 +14,11 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
-    "gamedig": "^2.0.23",
-    "helmet": "^4.3.1"
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "gamedig": "^4.0.2",
+    "helmet": "^5.0.2",
+    "node-cache": "^5.1.2"
   },
   "devDependencies": {
     "@types/cors": "^2.8.9",
