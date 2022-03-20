@@ -1,10 +1,18 @@
-FROM node:14.15.4-slim
+FROM node:17-alpine
 ENV PORT 8181
+
+ENV NODE_OPTIONS --openssl-legacy-provider
+
+# update alpine packages
+RUN apk update
+RUN apk upgrade --available
 
 RUN mkdir -p /app
 WORKDIR /app
 
 COPY . /app
+
+RUN npm audit fix
 
 RUN npm install
 

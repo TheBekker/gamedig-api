@@ -3,6 +3,7 @@ import express, { Request, Response } from 'express';
 import { off } from 'process';
 
 export const queryRouter = express.Router();
+const fs = require('fs');
 
 queryRouter.get('/:type/:host/:port', async (req: Request, res: Response) => {
     try {
@@ -45,4 +46,21 @@ queryRouter.get('/:type/:host/:port', async (req: Request, res: Response) => {
     } catch (e) {
         res.status(404).send(e.message);
     }
+});
+
+queryRouter.get('/types', async (req: Request, res: Response) => {
+    fs.readFile('./node_modules/gamedig/games.txt', 'utf8' , (err : any, data : any) => {
+        if (err) {
+            res.status(500).send(err);
+            return;
+        }
+        const dataCleaned = data.toString().replace('\n\n', '\n');
+        const lines = dataCleaned.split('\n');
+        const fieldNames = lines.shift().toString().trimStart().trimEnd().split('|');
+        const arrayLength = lines.length;
+        for (let i = 0; i < arrayLength; i++) {
+            lines[i] = lines[i].toString().split('|');
+        }
+        res.status(200).send(lines);
+    });
 });
