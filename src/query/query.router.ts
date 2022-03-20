@@ -12,14 +12,14 @@ queryRouter.get('/:type/:host/:port', async (req: Request, res: Response) => {
         const type: Type = req.params.type as Type;
         const host: string = req.params.host;
         const port: number = parseInt(req.params.port);
-        //const outputTemplate: string = decodeURI(req.query.template as string);
+        const outputTemplate: string = decodeURI(req.query.template as string);
         let offlineMessage: string = decodeURI(req.query.offline_message as string);
         if(!req.query.offline_message) {
             offlineMessage = 'Server offline';
         }
 
-        if ( myCache.has( host )) {
-            res.status(200).json(myCache.get( host ));
+        if ( myCache.has( type + host + port )) {
+            res.status(200).json(myCache.get( type + host + port ));
         } else {
             gamedig.query({
                 type: type,
@@ -32,20 +32,20 @@ queryRouter.get('/:type/:host/:port', async (req: Request, res: Response) => {
                     server_ping = r.ping,
                     server_connect = r.connect;
 
-    	    //if (req.query.template) {
-    	    //  const renderLine = outputTemplate
-                //            .replace(/{type}/g, type.toString())
-                //            .replace(/{host}/g, host)
-                //            .replace(/{port}/g, port.toString())
-                //            .replace(/{players_amount}/g, players_amount.toString())
-                //            .replace(/{players_max}/g, players_max.toString())
-                //            .replace(/{server_ping}/g, server_ping.toString())
-                //            .replace(/{server_connect}/g, server_connect);
-    	    //  res.status(200).send(renderLine);
-    	    //} else {
-                myCache.set(host, r);
+    	    if (req.query.template) {
+    	        const renderLine = outputTemplate
+                        .replace(/{type}/g, type.toString())
+                        .replace(/{host}/g, host)
+                        .replace(/{port}/g, port.toString())
+                        .replace(/{players_amount}/g, players_amount.toString())
+                        .replace(/{players_max}/g, players_max.toString())
+                        .replace(/{server_ping}/g, server_ping.toString())
+                        .replace(/{server_connect}/g, server_connect);
+    	        res.status(200).send(renderLine);
+    	    } else {
+                myCache.set( type + host + port , r);
     	        res.status(200).json(r);
-    	    //}
+    	    }
             }).catch(e => {
                 res.status(500).send(offlineMessage);
             });
